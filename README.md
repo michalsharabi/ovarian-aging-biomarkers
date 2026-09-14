@@ -1,45 +1,71 @@
-# predicteve
+# ovarian-aging-biomarkers
 
-Python-first project for ovarian aging biomarker discovery.
+Python-first research repository for ovarian aging biomarker discovery.
 
 ## Aim
 
-`predicteve` is an early-stage research codebase for discovering, prioritizing, and validating biomarkers of ovarian aging from multi-omics and clinical data.
+`ovarian-aging-biomarkers` is an early-stage research codebase for discovering, prioritizing, and validating biomarkers of ovarian aging from clinical, laboratory, and multi-omics data.
 
-The project is organized to support reproducible analysis from raw data ingestion through feature engineering, modeling, validation, and reporting.
+The project is organized to support reproducible analysis from raw data registration through feature engineering, modeling, validation, and reporting.
 
 ## Repository Layout
 
 ```text
-src/predicteve/      Python package code
-notebooks/           Exploratory notebooks and analysis narratives
-scripts/             Reusable command-line entry points
-data/                Local data placeholders; raw data stays out of git
-docs/                Project notes, study design, and analysis plans
-results/             Local output placeholders; generated results stay out of git
-tests/               Automated tests
+config/                  Dataset registry and analysis configuration
+data/
+  raw/                   Immutable source files, excluded from git
+  interim/               Intermediate cleaned extracts, excluded from git
+  processed/             Analysis-ready datasets, excluded from git
+  external/              Public reference data and annotations, excluded from git
+docs/                    Analysis plan, data dictionary, and research notes
+results/
+  figures/               Generated plots and visual outputs
+  tables/                Generated summary tables
+  models/                Serialized model artifacts
+  reports/               Rendered analysis reports
+  logs/                  Pipeline logs
+scripts/                 Command-line entry points for data and analysis tasks
+src/ovarian_aging_biomarkers/
+                         Reusable project package code
+src/predicteve/          Backward-compatible import alias
+tests/                   Unit and regression tests
 ```
 
-## Suggested First Milestones
+## Getting Started
 
-1. Define cohorts, phenotype labels, and inclusion/exclusion criteria.
-2. Create a data dictionary for clinical variables and omics matrices.
-3. Build reproducible preprocessing for each data modality.
-4. Establish baseline biomarker-ranking models.
-5. Validate candidate biomarkers across datasets or held-out cohorts.
-
-## Development
-
-This repository uses a `src/` Python package layout. After cloning, create a virtual environment and install the package in editable mode:
+Create the conda environment:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install -e "[dev]"
+conda env create -f environment.yml
+conda activate ovarian-aging-biomarkers
+```
+
+Install the local package in editable mode:
+
+```bash
+python -m pip install -e .
+```
+
+Validate the setup:
+
+```bash
+python scripts/run_analysis.py --help
 pytest
 ```
 
-## Data Policy
+## Data Management
 
-Do not commit raw human-subject data, private clinical metadata, credentials, or large generated artifacts. Keep those files local, encrypted, or in an approved controlled storage system.
+Raw and derived data are intentionally excluded from git. Register datasets in `config/datasets.yaml` with their provenance, access status, schema notes, and expected local path. Keep raw files immutable and write cleaned outputs to `data/interim/` or `data/processed/`.
+
+## Research Workflow
+
+1. Register each candidate dataset in `config/datasets.yaml`.
+2. Document variables and harmonization decisions in `docs/data_dictionary.md`.
+3. Keep statistical assumptions, endpoints, and validation decisions in `docs/analysis_plan.md`.
+4. Put reusable logic in `src/ovarian_aging_biomarkers/`.
+5. Use `scripts/` for repeatable command-line workflows.
+6. Save generated artifacts under `results/`.
+
+## Package Naming
+
+The canonical Python package is `ovarian_aging_biomarkers`. The old `predicteve` package name is kept as a compatibility alias while the repository is renamed.

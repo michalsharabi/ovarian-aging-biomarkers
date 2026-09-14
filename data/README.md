@@ -1,13 +1,10 @@
 # Data
 
-This folder is for local data organization only. Do not commit raw human-subject data, private clinical metadata, credentials, or large derived matrices.
+Data files are intentionally excluded from git.
 
-Suggested local layout:
+- `raw/`: immutable source files.
+- `external/`: public reference data and annotations.
+- `interim/`: intermediate cleaned extracts.
+- `processed/`: analysis-ready datasets.
 
-```text
-data/raw/        Original files from controlled sources
-data/interim/    Cleaned modality-specific intermediates
-data/processed/  Analysis-ready feature matrices and labels
-```
-
-Only README files and `.gitkeep` placeholders should be committed here.
+Register each dataset in `config/datasets.yaml` before using it in an analysis.

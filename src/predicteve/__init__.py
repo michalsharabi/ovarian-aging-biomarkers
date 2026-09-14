@@ -1,3 +1,5 @@
-"""Predicteve: ovarian aging biomarker discovery tools."""
+"""Backward-compatible import alias for the renamed research package."""
 
-__version__ = "0.1.0"
+from ovarian_aging_biomarkers import __version__
+
+__all__ = ["__version__"]

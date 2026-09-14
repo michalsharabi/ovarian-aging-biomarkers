@@ -1,12 +1,9 @@
 # Results
 
-Generated outputs belong here locally, but should not be committed by default.
+Generated outputs belong here and are excluded from git by default.
 
-Examples:
-
-- model metrics
-- ranked biomarker tables
-- plots
-- reports
-
-Commit only small, intentional summary artifacts when they are safe to share.
+- `figures/`: plots and visual outputs.
+- `tables/`: summary tables and model outputs.
+- `models/`: serialized model artifacts.
+- `reports/`: rendered analysis reports.
+- `logs/`: pipeline logs.

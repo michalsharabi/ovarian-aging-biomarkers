@@ -1,8 +1,14 @@
+# macOS and editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
+*$py.class
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -12,7 +18,10 @@ build/
 dist/
 *.egg-info/
 
-# Virtual environments
+# Environments
+.env
+.env.*
+!.env.example
 .venv/
 venv/
 env/
@@ -20,23 +29,25 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
-# Local configuration and secrets
-.env
-.env.*
-!.env.example
+# Local data and generated outputs
+data/raw/**
+data/interim/**
+data/processed/**
+data/external/**
+results/figures/**
+results/tables/**
+results/models/**
+results/reports/**
+results/logs/**
 
-# Data and generated outputs
-/data/raw/**
-/data/interim/**
-/data/processed/**
-/results/**
-!/data/README.md
-!/data/raw/.gitkeep
-!/data/interim/.gitkeep
-!/data/processed/.gitkeep
-!/results/README.md
+# Keep folder placeholders
+!data/**/.gitkeep
+!results/**/.gitkeep
 
-# OS/editor
-.DS_Store
-.vscode/
-.idea/
+# Large research artifacts
+*.h5
+*.hdf5
+*.parquet
+*.feather
+*.pkl
+*.joblib

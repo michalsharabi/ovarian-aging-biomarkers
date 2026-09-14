@@ -1,11 +1,5 @@
 # Notebooks
 
-Use this folder for exploratory analysis and narrative research notebooks.
+Exploratory notebooks and analysis narratives.
 
-Recommended naming pattern:
-
-```text
-YYYY-MM-DD_short-question-or-analysis.ipynb
-```
-
-Keep notebooks reproducible by moving reusable logic into `src/predicteve/`.
+Keep notebooks lightweight and move reusable logic into `src/ovarian_aging_biomarkers/` once it stabilizes.

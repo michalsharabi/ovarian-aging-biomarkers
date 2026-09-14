@@ -1,0 +1,38 @@
+# Dataset registry for ovarian aging biomarker research.
+#
+# Add one entry per dataset. Keep raw data out of git and store local paths under data/raw,
+# data/external, data/interim, or data/processed as appropriate.
+
+datasets:
+  - id: example_dataset
+    name: Example dataset placeholder
+    status: planned
+    owner: TBD
+    source_url: null
+    access_notes: "Replace with access requirements, consent constraints, and data-use terms."
+    local_path: data/raw/example_dataset/
+    file_format: null
+    population: null
+    sample_size: null
+    unit_of_analysis: participant
+    key_identifiers:
+      - participant_id
+    time_fields: []
+    biomarker_domains:
+      - reproductive_hormones
+      - metabolic
+      - inflammatory
+      - genomic_or_epigenetic
+    clinical_domains:
+      - menstrual_cycle
+      - fertility_history
+      - menopause_status
+      - symptoms
+    outcome_fields: []
+    covariates:
+      - age
+      - bmi
+      - medication_use
+      - smoking_status
+    data_dictionary: docs/data_dictionary.md
+    notes: "Replace or remove this placeholder when real datasets are registered."
