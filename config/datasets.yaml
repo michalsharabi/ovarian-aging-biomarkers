@@ -1,38 +1,133 @@
 # Dataset registry for ovarian aging biomarker research.
 #
-# Add one entry per dataset. Keep raw data out of git and store local paths under data/raw,
-# data/external, data/interim, or data/processed as appropriate.
+# Keep raw data out of git. Store local paths under data/raw, data/external,
+# data/interim, or data/processed as appropriate.
 
 datasets:
-  - id: example_dataset
-    name: Example dataset placeholder
+  - id: GSE255690
+    name: Human ovarian aging scRNA-seq and spatial transcriptomics
     status: planned
-    owner: TBD
-    source_url: null
-    access_notes: "Replace with access requirements, consent constraints, and data-use terms."
-    local_path: data/raw/example_dataset/
-    file_format: null
-    population: null
+    role: primary_human_reproducibility
+    species: human
+    modality:
+      - scRNA-seq
+      - spatial_transcriptomics
+    age_structure:
+      - young
+      - middle
+      - older
+    access_notes: "Register donor-level metadata before differential expression."
+    local_path: data/raw/GSE255690/
+    expected_metadata:
+      donor_table: data/raw/GSE255690/donor_metadata.tsv
+      cell_metadata: data/raw/GSE255690/cell_metadata.tsv
     sample_size: null
-    unit_of_analysis: participant
+    unit_of_analysis: donor
     key_identifiers:
-      - participant_id
-    time_fields: []
+      - dataset_id
+      - donor_id
+      - cell_type
     biomarker_domains:
-      - reproductive_hormones
-      - metabolic
-      - inflammatory
-      - genomic_or_epigenetic
-    clinical_domains:
-      - menstrual_cycle
-      - fertility_history
-      - menopause_status
-      - symptoms
-    outcome_fields: []
-    covariates:
-      - age
-      - bmi
-      - medication_use
-      - smoking_status
+      - ovarian_tissue_aging
+      - cell_type_specific_transcriptomics
+      - spatial_localization
+    primary_use:
+      - donor_metadata_audit
+      - cell_type_coverage_audit
+      - pseudobulk_differential_expression
+      - spatial_validation
     data_dictionary: docs/data_dictionary.md
-    notes: "Replace or remove this placeholder when real datasets are registered."
+    notes: "Spatial data is orthogonal support, not a fully independent cohort if donors overlap."
+
+  - id: GSE202601
+    name: Human ovarian aging snRNA-seq and snATAC-seq
+    status: planned
+    role: primary_human_reproducibility_and_regulatory_support
+    species: human
+    modality:
+      - snRNA-seq
+      - snATAC-seq
+    age_structure:
+      - young
+      - reproductively_aged
+    access_notes: "Use RNA for pseudobulk replication and ATAC for regulatory support."
+    local_path: data/raw/GSE202601/
+    expected_metadata:
+      donor_table: data/raw/GSE202601/donor_metadata.tsv
+      cell_metadata: data/raw/GSE202601/cell_metadata.tsv
+    sample_size: null
+    unit_of_analysis: donor
+    key_identifiers:
+      - dataset_id
+      - donor_id
+      - cell_type
+    biomarker_domains:
+      - ovarian_tissue_aging
+      - cell_type_specific_transcriptomics
+      - chromatin_accessibility
+    primary_use:
+      - donor_metadata_audit
+      - cell_type_coverage_audit
+      - pseudobulk_differential_expression
+      - atac_validation
+    data_dictionary: docs/data_dictionary.md
+    notes: "Do not force cell subtype homology when annotations are not reliable across datasets."
+
+  - id: stowers_mouse_ovarian_aging
+    name: Stowers mouse ovarian-aging dataset
+    status: planned
+    role: cross_species_mechanistic_support
+    species: mouse
+    modality:
+      - ovarian_aging_reference
+    access_notes: "Use only after human-derived signature is defined."
+    local_path: data/external/stowers_mouse_ovarian_aging/
+    expected_metadata:
+      donor_table: data/external/stowers_mouse_ovarian_aging/sample_metadata.tsv
+    sample_size: null
+    unit_of_analysis: animal_or_sample
+    key_identifiers:
+      - sample_id
+      - ortholog_gene_id
+    biomarker_domains:
+      - cross_species_conservation
+      - pathway_conservation
+    primary_use:
+      - ortholog_mapping
+      - same_direction_aging_effect_support
+      - pathway_conservation_support
+    data_dictionary: docs/data_dictionary.md
+    notes: "Mechanistic support only; not a primary source for the human tissue-aging signature."
+
+candidate_validation_resources:
+  olink:
+    role: direct_protein_translation
+    use_for:
+      - secreted_or_shed_candidate_assays
+      - plasma_detectability
+    notes: "Map ovarian tissue genes to proteins only when biology and assay feasibility support it."
+  nightingale:
+    role: systemic_metabolic_context
+    use_for:
+      - metabolic_negative_controls
+      - unbiased_metabolomic_associations
+      - downstream_correlates
+    notes: "Do not map genes directly to Nightingale metabolites."
+
+negative_control_domains:
+  systemic_aging_and_inflammation:
+    examples:
+      - CRP
+      - IL6
+      - GlycA
+      - SASP_markers
+      - general_metabolic_inflammatory_markers
+
+sprint_0_deliverables:
+  tables:
+    - results/tables/donor_characteristics.tsv
+    - results/tables/donor_celltype_coverage.tsv
+  figures:
+    - results/figures/donor_celltype_coverage_heatmap.png
+  documents:
+    - docs/frozen_analysis_plan_v1.md

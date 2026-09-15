@@ -66,6 +66,31 @@ Raw and derived data are intentionally excluded from git. Register datasets in `
 5. Use `scripts/` for repeatable command-line workflows.
 6. Save generated artifacts under `results/`.
 
+## Sprint 0
+
+The first milestone is a human-first reproducibility and specificity challenge, not a machine-learning model.
+
+Deliverables:
+
+```text
+results/tables/donor_characteristics.tsv
+results/tables/donor_celltype_coverage.tsv
+results/figures/donor_celltype_coverage_heatmap.png
+docs/frozen_analysis_plan_v1.md
+```
+
+Create the donor metadata table:
+
+```bash
+python scripts/audit_donor_metadata.py data/raw/GSE255690/donor_metadata.tsv
+```
+
+Create the donor by cell-type coverage table and heatmap:
+
+```bash
+python scripts/audit_celltype_coverage.py data/raw/GSE255690/cell_metadata.tsv
+```
+
 ## Package Naming
 
 The canonical Python package is `ovarian_aging_biomarkers`. The old `predicteve` package name is kept as a compatibility alias while the repository is renamed.
